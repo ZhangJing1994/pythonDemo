@@ -8,3 +8,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 CMD [ "python", "./app.py" ]
+
+##基于电投paas平台部署
+FROM  172.16.66.29:81/base/python:3.5-alpine
+WORKDIR demo04
+COPY ./  /demo04
+RUN cd /demo04/ && pip install  --no-index  --find-links=/demo04/pip_packages -r requirements.txt
+EXPOSE 5000
+CMD [ "python", "./app.py" ]
